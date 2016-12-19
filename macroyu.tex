@@ -1,0 +1,563 @@
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{ulem}
+\usepackage{mdwlist}
+\usepackage{xspace}
+\usepackage{mathtools}
+\usepackage{enumerate}
+% % % % % % % % % % % % %
+\usepackage{hhline}
+% % % % % % % % % % % % %
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{xparse}
+%\usepackage{mathabx}
+
+%\usepackage{physics}
+
+%repeating stuff
+\usepackage{forloop}% http://ctan.org/pkg/forloop
+\newcounter{loopcntr}
+\newcommand*{\rpt}[2][1]{%
+  \forloop{loopcntr}{0}{\value{loopcntr}<#1}{#2}%
+}
+
+%cupdot
+\makeatletter
+\providecommand*{\cupdot}{%
+  \mathbin{%
+    \mathpalette\@cupdot{}%
+  }%
+}
+\newcommand*{\@cupdot}[2]{%
+  \ooalign{%
+    $\m@th#1\cup$\cr
+    \hidewidth$\m@th#1\cdot$\hidewidth
+  }%
+}
+\makeatother
+
+\newenvironment{pseudo}[1]{ %Requires \usepackage{enumerate} !!!
+	\begin{samepage}
+	#1
+	\begin{enumerate}[1\;\;\ ]
+	\setlength{\itemsep}{-6pt}
+}{
+	\end{enumerate}
+	\end{samepage}
+}
+
+\newenvironment{qquadent}{
+	\begin{itemize}\item[]
+}{
+	\end{itemize}
+}
+
+\newenvironment{qquadentt}{
+	\begin{itemize}\item[]\begin{itemize}\item[]
+}{
+	\end{itemize}\end{itemize}
+}
+
+\newcommand*{\parp}{\hangindent=15pt}
+
+% customizable matrix
+\makeatletter
+\renewcommand*\env@matrix[1]%[*\c@MaxMatrixCols c]
+{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+%
+%\left \right spacing issues
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+% found at
+% http://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
+
+% grouping vertical spacing
+\newcommand*\outbound[2]{\vphantom{#2}\smash{#1{#2}}}
+
+
+%
+%\mathrm should be replaced by \textnormal
+%e.g. \norm{x}_{\textnormal{H\"older}}
+% source: http://tex.stackexchange.com/questions/14821/whats-the-proper-way-to-typeset-a-differential-operator
+
+
+% BASICS
+
+\theoremstyle{definition}
+\newtheorem*{Def}{Definition}
+\theoremstyle{plain}
+\newtheorem*{Thm}{Theorem}
+\newtheorem*{Lem}{Lemma}
+\newtheorem*{Claim}{Claim}
+\newtheorem*{Prop}{Proposition}
+\newtheorem*{Cor}{Corollary}
+\theoremstyle{remark}
+\newtheorem*{Remark}{Remark}
+\newcommand*\case\textbf%[1]{\strong{case\xspace#1}}
+\newcommand*\Case\textbf%[1]{\strong{Case\xspace#1}}
+\newcommand*\defined\textbf
+
+% Latin
+\newcommand*{\latinabb}[1]{\textit{#1}\xspace}
+\newcommand*{\ie}{\latinabb{i.e.}}
+\newcommand*{\eg}{\latinabb{e.g.}}
+\newcommand*{\etc}{\latinabb{etc}}
+\newcommand*{\vs}{\latinabb{vs}}
+\newcommand*\latin\textit
+
+% math abbrev
+\newcommand*{\mathabb}[1]{\emph{#1}\xspace}
+\newcommand*{\mwlog}{\mathabb{w.l.o.g.}}
+\newcommand*{\mwrt}{\mathabb{w.r.t.}}
+\newcommand*{\mst}{\mathabb{s.t.}}
+
+% text in math
+\newcommand*\txtand{\text{ and }}
+\newcommand*\txtor{\text{ or }}
+\newcommand*\txtif{\text{ if }}
+
+% common set notation
+
+\newcommand*{\Naturals}{\mathbb{N}}
+\newcommand*{\Integers}{\mathbb{Z}}
+\newcommand*\Positives{\mathbb P}
+\newcommand*{\Rationals}{\mathbb{Q}}
+\newcommand*{\Reals}{\mathbb{R}}
+\newcommand*{\Complexes}{\mathbb{C}}
+\newcommand*\Field{\mathbb{F}}
+\newcommand*{\Universe}{\mathbb V}
+\newcommand*{\Ordinals}{\mathbb{ON}}
+
+\newcommand*{\power}{\mathcal{P}}
+\DeclareMathOperator*\im{im}
+%\DeclareMathOperator*\kernel{ker}
+\newcommand*{\empset}{\varnothing}
+\newcommand*{\union}{\cup}
+\newcommand*{\dunion}{\cupdot}
+\newcommand*{\intersect}{\cap}
+\newcommand*{\close}{\ol}
+\newcommand*{\Union}{\bigcup}
+\newcommand*{\Intersect}{\bigcap}
+\newcommand*{\comp}{^{\mathsf{C}}}
+\newcommand*\sdif\Delta
+\newcommand*{\cpm}[1]{{#1}^C}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand*{\limplies}{\rightarrow}
+\newcommand*{\limpliedby}{\leftarrow}
+\newcommand*{\liff}{\leftrightarrow}
+\newcommand*\true\top
+\newcommand*\false\bot
+\DeclareMathOperator*{\cf}{cf}
+\DeclareMathOperator*\lcm{lcm}
+\newcommand*\mins[1]{\min\set{#1}}
+
+\newcommand*{\dsfrac}{\displaystyle\frac}
+\newcommand*{\degree}{^\circ}
+\newcommand*{\aside}[1]{&&\text{#1}}
+\newcommand*{\define}{\textbf}
+\newcommand*{\supst}{\textsuperscript{st}\xspace}
+\newcommand*{\supnd}{\textsuperscript{nd}\xspace}
+\newcommand*{\suprd}{\textsuperscript{rd}\xspace}
+\newcommand*{\supth}{\textsuperscript{th}\xspace}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % %5
+% LETTERS
+\newcommand*\Tau{\mathrm{T}}
+
+% Script letters
+%\numberwithin{equation}{section}
+
+\newcommand*{\sfA}{\mathsf{A}}
+\newcommand*{\sfB}{\mathsf{B}}
+\newcommand*\sfC{\mathsf{C}}
+\newcommand*{\sfD}{\mathsf{D}}
+\newcommand*\sfE{\mathsf{E}}
+\newcommand*{\sfF}{\mathsf{F}}
+\newcommand*{\sfG}{\mathsf{G}}
+\newcommand*{\sfH}{\mathsf{H}}
+\newcommand*\sfI{\mathsf{I}}
+\newcommand*\sfJ{\mathsf{J}}
+\newcommand*\sfK{\mathsf{K}}
+\newcommand*{\sfL}{\mathsf{L}}
+\newcommand*{\sfM}{\mathsf{M}}
+\newcommand*{\sfN}{\mathsf{N}}
+\newcommand*\sfO{\mathsf{O}}
+\newcommand*\sfP{\mathsf{P}}
+\newcommand*\sfQ{\mathsf{Q}}
+\newcommand*\sfR{\mathsf{R}}
+\newcommand*{\sfS}{\mathsf{S}}
+\newcommand*{\sfT}{\mathsf{T}}
+\newcommand*{\sfU}{\mathsf{U}}
+\newcommand*{\sfV}{\mathsf{V}}
+\newcommand*\sfW{\mathsf{W}}
+\newcommand*\sfX{\mathsf{X}}
+\newcommand*\sfY{\mathsf{Y}}
+\newcommand*\sfZ{\mathsf{Z}}
+
+
+\newcommand*{\calA}{\mathcal{A}}
+\newcommand*{\calB}{\mathcal{B}}
+\newcommand*\calC{\mathcal{C}}
+\newcommand*{\calD}{\mathcal{D}}
+\newcommand*\calE{\mathcal{E}}
+\newcommand*{\calF}{\mathcal{F}}
+\newcommand*{\calG}{\mathcal{G}}
+\newcommand*{\calH}{\mathcal{H}}
+\newcommand*\calI{\mathcal{I}}
+\newcommand*\calJ{\mathcal{J}}
+\newcommand*\calK{\mathcal{K}}
+\newcommand*{\calL}{\mathcal{L}}
+\newcommand*{\calM}{\mathcal{M}}
+\newcommand*{\calN}{\mathcal{N}}
+\newcommand*\calO{\mathcal{O}}
+\newcommand*\calP{\mathcal{P}}
+\newcommand*\calQ{\mathcal{Q}}
+\newcommand*\calR{\mathcal{R}}
+\newcommand*{\calS}{\mathcal{S}}
+\newcommand*{\calT}{\mathcal{T}}
+\newcommand*{\calU}{\mathcal{U}}
+\newcommand*{\calV}{\mathcal{V}}
+\newcommand*\calW{\mathcal{W}}
+\newcommand*\calX{\mathcal{X}}
+\newcommand*\calY{\mathcal{Y}}
+\newcommand*\calZ{\mathcal{Z}}
+
+\newcommand*{\frakC}{\mathfrak{C}}
+
+\newcommand*{\bbS}{\mathbb{S}}
+
+% Linear 
+
+\DeclareMathOperator{\ch}{char}
+\DeclareMathOperator{\linspan}{span}
+\newcommand*{\nullspace}[1]{\mathsf{N}\paren{#1}}
+%\newcommand*{\range}[1]{\mathsf{R}\paren{#1}}
+\DeclareMathOperator{\nullity}{nullity}
+%\DeclareMathOperator{\rank}{rank}
+\newcommand*{\leftmult}[1]{\mathsf{L}_{#1}}
+\newcommand*{\Linmaps}{\mathcal{L}}
+\newcommand*\dual[1]{{#1}^*}
+\newcommand\Mat[1]{\begin{bmatrix}{c}#1\end{bmatrix}}
+\newcommand\Matt[1]{\begin{bmatrix}{cc}#1\end{bmatrix}}
+
+% DELIMITERS and OPERATORS
+%\let\originalleft\left
+%\let\originalright\right
+%\newcommand{\lefta}{\mathopen{}\mathclose\bgroup\originalleft}
+%\newcommand{\righta}{\aftergroup\egroup\originalright}
+%\renewcommand{\left}{\mathopen{}\originalleft}
+%\renewcommand{\right}{\aftergroup\egroup\originalright}
+\newcommand*\mixedmath[3]{%
+	#1{#3}%
+	\ifx#1\mathbin
+	\nonscript\mskip-\medmuskip
+	\mathord{}%
+	\fi
+	\ifx#1\mathpunct
+	\nonscript\mskip-\thinmuskip
+	\fi
+	\mathclose{}\mathopen{}%
+	\ifx#2\mathbin
+	\mathord{}%
+	\nonscript\mskip-\medmuskip
+	\fi
+	#2{}%
+}
+\newcommand*\mathopord[1]{\mixedmath{\mathop}{\mathord}{#1}}
+
+\newcommand*{\defeq}{\stackrel{\text{def}}{=}}
+\newcommand*{\leteq}{\stackrel{\text{let}}{=}}
+\newcommand*{\valeq}{\stackrel{\text{val}}{=}}
+\newcommand*{\insteq}{\stackrel{\text{inst}}{=}}
+\newcommand*{\paren}[1]{\left(#1\right)}
+\newcommand*{\bigparen}[1]{\bigl(#1\bigr)}
+\newcommand*{\biggparen}[1]{\biggl(#1\biggr)}
+\newcommand*{\Bigparen}[1]{\Bigl(#1\Bigr)}
+\newcommand*{\Biggparen}[1]{\Biggl(#1\Biggr)}
+\newcommand*{\brac}[1]{\left[#1\right]}
+\newcommand*{\gbrace}[1]{\left\{#1\right\}}
+\newcommand*{\angleb}[1]{\left\langle#1\right\rangle}
+\newcommand*{\sgbar}[1]{\left\lvert#1\right\rvert}
+\newcommand*{\dbbar}[1]{\left\lVert#1\right\rVert}
+\newcommand*{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand*{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand*{\inv}[1]{#1^{-1}}
+\newcommand*\join\vee
+\newcommand*\meet\wedge
+\newcommand*\prep[2]{#1{\paren{#2}}}
+
+% More semantic operators
+\newcommand*{\cart}{\times}
+\newcommand*{\inm}{\cdot}
+\newcommand*{\outm}{\circ}
+\newcommand*{\mult}{\mathbin{\cdot}}
+\newcommand*{\crm}{\times}
+%\renewcommand*{\vec}{\mathbf}
+\newcommand*{\vecg}{\boldsymbol}
+\newcommand*\tp\intercal
+\newcommand*{\compose}{\circ}
+\newcommand*{\ul}{\underline}
+\newcommand*{\ol}{\overline}
+\DeclareMathOperator{\modop}{mod}
+\DeclareMathOperator{\rmRe}{Re}
+\DeclareMathOperator{\rmIm}{Im}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand*{\inprod}[2]{\left\langle#1,#2\right\rangle}
+%\newcommand*{\norm}[1]{\left|\left|#1\right|\right|}
+%\newcommand*{\norm}{\dbbar} % #physicspackage
+%\newcommand*{\abs}{\sgbar}
+\newcommand*{\conj}{\ol}
+\newcommand*{\card}{\#}
+\newcommand*{\rowvec}{\brac}
+\newcommand*{\arr}{\paren}
+\newcommand*{\tup}{\paren}
+\newcommand*{\set}{\gbrace}
+\newcommand*{\mset}{\gbrace}
+%\newcommand*{\ord}{\paren}
+%\newcommand*{\app}{\paren}
+\newcommand*{\call}{\paren}
+\newcommand*{\oldidx}{\brac}
+\newcommand*{\edge}[2]{\tup{#1,#2}}
+\newcommand*{\medge}[2]{\tup{#1,#2}}
+\newcommand*{\size}{\abs}
+\newcommand*{\seq}{\angleb}
+%\newcommand*{\dntvl}[2]{\gbrace{#1,\dots,#2}}
+\newcommand*{\ontvl}[2]{\paren{#1,#2}}
+\newcommand*{\cntvl}[2]{\brac{#1,#2}}
+\newcommand*{\pair}[2]{\seq{#1,#2}}
+\newcommand*{\trip}[3]{\seq{#1,#2,#3}}
+\renewcommand*\d[1]{\mathop{d#1}}
+
+% cs stuff
+\newcommand*{\cat}{+}
+\newcommand*{\subarr}[2]{\oldidx{#1..#2}}
+\newcommand*{\empstr}{\lambda}
+\newcommand*{\lang}[1]{L\paren{#1}}
+\newcommand*{\langlbl}[1]{\angleb{\textit{#1}}}
+\DeclareMathOperator{\logb}{lg}
+\newcommand*{\bigO}{\mathcal{O}}
+
+\newcommand*{\p}{\quad}
+\newcommand*{\pp}{\qquad}
+\newcommand*{\ppp}{\qquad\quad}
+\newcommand*{\pppp}{\qquad\qquad}
+\newcommand*{\ppppp}{\qquad\qquad\quad}
+\newcommand*{\pppppp}{\qquad\qquad\qquad}
+\newcommand*{\ppppppp}{\qquad\qquad\qquad\quad}
+\newcommand*{\pppppppp}{\qquad\qquad\qquad\qquad}
+\newcommand*{\ppppppppp}{\qquad\qquad\qquad\qquad\quad}
+\newcommand*{\pppppppppp}{\qquad\qquad\qquad\qquad\qquad}
+\newcommand*{\ppppppppppp}{\qquad\qquad\qquad\qquad\qquad\quad}
+\newcommand*{\pppppppppppp}{\qquad\qquad\qquad\qquad\qquad\qquad}
+\newcommand*{\ppppppppppppp}{\qquad\qquad\qquad\qquad\qquad\qquad\quad}
+
+% YU syntax
+
+
+\newcommand*\lfsp[1]{\mathopord{{}_{}^{#1\!}}}
+\newcommand*{\pre}[2]{{}^{}_{#1\!}{#2}}
+\newcommand*{\mat}[3]{{#2}_{#1}^{#3}}%{{}^{}_{#1\!}{#2}^{#3}}
+\newcommand*{\row}[2]{{#2}_{#1}}%{{}^{}_{#1\!}{#2}}
+%\newcommand*{\col}[2]{{#1}^{#2}}%{{#1}^{#2}}
+\newcommand*{\0}{\empset}
+\newcommand*{\ray}{\ul}
+%\newcommand*{\neg}{\lnot}
+%\newcommand*{\ray}\ol%{sO{}m}{\stackrel{\scriptsize{#2}}{\IfBooleanTF#1{#3}{\ol{#3}}}}
+\renewcommand*\d[1]{#1-1}
+\newcommand*\ci{^\frown}
+\newcommand*\dex[1]{\big[{\scriptscriptstyle{}^{#1}}\big]}
+\let\cprod\cp % #physicspackage
+\newcommand*\cp\compose
+\DeclareMathOperator\suc{succ}
+\DeclareMathOperator\supp{Supp}
+%\newcommand*\idx[2]{_{#1\in\ray{#2}}}
+%\newcommand*\idxs[2]{_{#1\in\ray{#2+1}}}
+\newcommand*\stdidx[2]{_{#1=0}^{#2-1}}
+\newcommand*\stdidxs[2]{_{#1=0}^{#2}}
+\DeclareDocumentCommand \idx { o m } {%
+  \IfNoValueTF {#1} {%
+    _0^{#2-1}%
+  }{%
+    _{#1=0}^{#2-1}%
+  }%
+}
+\DeclareDocumentCommand \idxs { o m } {%
+  \IfNoValueTF {#1} {%
+    _0^{#2}%
+  }{%
+    _{#1=0}^{#2}%
+  }%
+}
+
+\newcommand*\rfold[2]{^{#1#2}}
+
+% SHORTS
+
+% Shorthands
+\newcommand*\ts\textstyle
+\newcommand*\ds\displaystyle
+\newcommand*\fs[2]{#1/#2}
+
+% Greek
+\newcommand*\eps\varepsilon
+\newcommand*\dlt\delta
+\newcommand*\lda\lambda
+\renewcommand*\o\omega
+\newcommand*\tht\theta
+\newcommand*\z\zeta
+\renewcommand*\a\alpha
+\renewcommand*\b\beta
+\newcommand*\gm\gamma
+\newcommand*\Gm\Gamma
+\newcommand*\sg\sigma
+\newcommand*\Sg\Sigma
+
+% Analysis
+%\newcommand*{\grad}{\nabla} % #physicspackage
+\newcommand*\pd\partial
+\newcommand*\lap\Delta
+
+% Lie theory
+\newcommand*\herm[1]{#1^*}
+\newcommand*\hermg[1]{\g{#1}^*}
+\newcommand*\SU{\mathrm{SU}\paren}
+\newcommand*\su{\mathfrak{su}\paren}
+\newcommand*\SO{\mathrm{SO}\paren}
+\newcommand*\so{\mathfrak{so}\paren}
+\newcommand*\U{\mathrm{U}\paren}
+
+% Category theory / algebra
+\DeclareMathOperator\Hom{Hom}
+%\newcommand*\op{\mathsf{op}}
+\newcommand*\lact[1]{{}_{#1\!}}
+\newcommand*\ract_
+%\DeclareMathOperator\Tr{Tr} % #physicspackage
+\newcommand*\rd\sqrt
+\DeclareMathOperator\nil{Nil}
+\DeclareMathOperator\ord{ord}
+\newcommand*\idl\trianglelefteq
+\newcommand*\ldi\trianglerighteq
+\newcommand*\zeros{\calZ\paren}
+\newcommand*\ideal{\calI\paren}
+
+\DeclareMathOperator\Split{Split}
+\DeclareMathOperator\Jac{Jac}
+\DeclareMathOperator\GL{GL}
+
+
+% Set theory
+\newcommand*{\sti}{\intersect}
+\newcommand*{\stu}{\union}
+\newcommand*{\stm}{\setminus}
+\newcommand*\sbs\subset
+\renewcommand*\sb\subseteq
+\renewcommand*\sp\supseteq
+\newcommand*\sps\supset
+
+% Short
+\newcommand*\ce\coloneqq
+\DeclareMathOperator\id{id}
+\newcommand*\tsup\textsuperscript
+\newcommand*\f\frac
+\newcommand*\m\mult
+\renewcommand*\l\ell
+%\newcommand*\P\Positives
+\newcommand*\A{\mathbb{A}}
+\newcommand*\Q\Rationals
+\newcommand*\R\Reals
+\newcommand*\C\Complexes
+\newcommand*\N\Naturals
+\newcommand*\Z\Integers
+\newcommand*\F\Field
+\newcommand*\ON\Ordinals
+\newcommand*\oo\infty
+\newcommand*\noo{{-\oo}}
+\newcommand*\tpi{2\pi}
+\newcommand*\g\paren
+\renewcommand\sf[2]{{\textstyle\f{#1}{#2}}}
+\newcommand*\oqq{``}
+\newcommand*\drr\downarrow
+\newcommand*\urr\uparrow
+\DeclareMathOperator\gal{Gal}
+\DeclareMathOperator\fix{Fix}
+\DeclareMathOperator\aut{Aut}
+\DeclareMathOperator\spl{Split}
+\newcommand*\gen\angleb
+\newcommand*\nse\trianglelefteq
+\newcommand*\cl\close
+\newcommand*\ob\outbound
+%\newcommand*\ip\inprod % #physicspackage
+\newcommand*\Dlt\Delta
+\newcommand*\ep\epsilon
+\newcommand*\vp\varphi
+%\newcommand*\op\oplus
+\newcommand*\om\otimes
+\newcommand*\Om\bigotimes
+\newcommand*\oa\oplus
+\newcommand*\Oa\bigoplus
+\newcommand*\nm\norm
+\newcommand*\spr\inprod
+\newcommand*\bk{\mathbin{|}}
+
+\newcommand*\tand{\text{ and }}
+
+% SUPER HACKS
+
+\catcode`;=11
+
+\usepackage{letltxmacro}
+\LetLtxMacro{\dispeqa}{\[}
+\LetLtxMacro{\dispeqz}{\]}
+\renewcommand*\[{\dispeqa\begin{aligned}}
+\renewcommand*\]{\end{aligned}\dispeqz}
+
+%\begingroup
+%\lccode`~=`.
+%\lowercase{\endgroup
+%	\def~{\m}%
+%}%
+%\mathcode`.="8000
+
+\makeatletter
+\def\@swallow#1{}
+\def\@thirdofthree#1#2#3{#3}
+\newcommand*\paren@three[3]{\paren{{#1}#2{#3}}}
+\newcommand*\app[1]{
+	\@ifnextchar_
+	{\if(#1(\else\@thirdofthree\fi\@swallow{\paren@three{#1}}}
+	{\if(#1(\else\@thirdofthree\fi\@swallow{\paren{#1}}}
+}
+\makeatother
+
+\begingroup
+\lccode`~=``
+\lowercase{\endgroup
+	\def~{\app}%
+}%
+\mathcode``="8000
+
+\begingroup
+\lccode`~=`"
+\lowercase{\endgroup
+	\def~{\inv}%
+}%
+\mathcode`"="8000
+
+% 
+% keyword look up:
+% catcode active
+% Readings:
+% http://compgroups.net/comp.text.tex/redefining-backtick/1913628
+% http://tex.stackexchange.com/questions/47351/can-i-redefine-a-command-to-contain-itself
+% http://tex.stackexchange.com/questions/2607/spacing-around-left-and-right/
