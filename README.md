@@ -1,1 +1,1 @@
-My $\LaTeX$ macros.
+My LaTeX macros.
